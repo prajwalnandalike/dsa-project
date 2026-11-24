@@ -1,0 +1,23 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Dhanvantari - AYUSH case-taking in C</title><link rel="stylesheet" href="style.css">
+<script src="app.js"></script><script src="ayush.js" async></script></head><body>
+<header><h1>Dhanvantari</h1><nav><a href="#home">Home</a><a href="#intake">Intake</a><a href="#case">Case</a><a href="#map">Mapping</a><a href="#bill">Billing</a><a href="#dsa">Structures</a></nav></header><main>
+<section id="home"><h2>AYUSH case-taking, written in C</h2>
+<p>Register patients, record a case, map traditional terms to ICD-11 TM2 codes, and get care guidance. Every operation runs in C code compiled to WebAssembly.</p>
+<table><tr><th>Data structure</th><th>Used for</th></tr>
+<tr><td>Circular array queue</td><td>OPD waiting line</td></tr><tr><td>Binary search tree</td><td>Patient index by ID</td></tr>
+<tr><td>Singly linked list</td><td>Visit history per patient</td></tr><tr><td>Hash table (chaining)</td><td>Term to code lookup</td></tr>
+<tr><td>Stack</td><td>Undo of finalized diagnoses</td></tr></table></section>
+<section id="intake" hidden><h2>Patient intake</h2>
+<input id="n" placeholder="Name"><input id="a" type="number" min="0" max="120" placeholder="Age" style="width:90px">
+<select id="p"><option>vata</option><option>pitta</option><option>kapha</option><option>other</option></select><br>
+<input id="c" placeholder="Chief complaint, e.g. joint pain and stiffness" style="width:100%"><button onclick="reg()">Add to queue</button><p class="msg" id="rmsg"></p>
+<h3>Waiting line</h3><div class="q" id="qv"></div></section>
+<section id="case" hidden><h2>Case taking</h2><button onclick="nxt()">Call next patient</button><span class="msg" id="cmsg"></span>
+<div class="card" id="pt">No patient called yet.</div><div id="sug"></div>
+<input id="man" placeholder="Or type a term, e.g. Kasa"><button onclick="fin()">Finalize diagnosis</button><button class="alt" onclick="und()">Undo last</button>
+<div id="care"></div></section>
+<section id="map" hidden><h2>Term mapping</h2><input id="mq" placeholder="Symptom or term" style="width:60%"><button onclick="srch()">Search</button><div id="mr"></div></section>
+<section id="bill" hidden><h2>Claim sheet</h2><input id="bid" type="number" placeholder="Patient ID" style="width:140px"><button onclick="bil()">Generate</button><div id="br"></div></section>
+<section id="dsa" hidden><h2>Live data structures</h2><button class="alt" onclick="dsa()">Refresh</button><div id="dv"></div></section></main>
+<footer>Sample terminology dataset. A clinician must review every mapping and care suggestion.</footer></body></html>
